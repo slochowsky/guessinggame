@@ -1,43 +1,63 @@
 ﻿using System;
 
-namespace GuessingGame
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Random rand = new Random();
+namespace GuessingGame {
+    class Program {
+        static void Main (string[] args) {
 
-            int secretNumber = rand.Next(1, 101);
+            Random rand = new Random ();
 
-            int guessesGiven = 0;
+            int secretNumber = rand.Next (1, 101);
 
-            while (guessesGiven < 4)
-            {
-            Console.WriteLine($"Guess the secret number. Your guess ({guessesGiven + 1})");
-            string userGuess = Console.ReadLine();
-            int userGuessInt = Int32.Parse(userGuess);
+            Console.WriteLine ("Select Difficulty: Easy, Medium, Hard, or Cheater");
+            string difficulty = Console.ReadLine ();
 
-            if (userGuessInt == secretNumber)
-            {
-                Console.WriteLine("Yup! you guessed right!");
-                break;
+            int attempts = 0;
+            int allowed = 8;
+
+            if (difficulty == "Easy") {
+                allowed = 8;
+            } else if (difficulty == "Medium") {
+                allowed = 6;
+            } else if (difficulty == "Hard") {
+                allowed = 4;
+            } else if (difficulty == "Cheater") {
+                allowed = 8;
+            } else {
+                Console.WriteLine ("Select Difficulty: Easy, Medium, Hard, or Cheater");
+                difficulty = Console.ReadLine ();
             }
-            else
-            {
-                Console.WriteLine("Nope, you guessed wrong..");
-            }
-                guessesGiven++;
-            if (userGuessInt > secretNumber)
-                {
-                    Console.WriteLine("lower!");
+
+            if (difficulty == "Cheater") {
+                while (true) {
+                    Console.WriteLine ($"Guess the secret number. Your guess ({attempts + 1})");
+                    string userGuess = Console.ReadLine ();
+                    int userGuessInt = Int32.Parse (userGuess);
+                    if (userGuessInt == secretNumber) {
+                        Console.WriteLine ("Yup! You guessed it!");
+                        break;
+                    } else if (userGuessInt > secretNumber) {
+                        Console.WriteLine ("Nope, too high!");
+                    } else if (userGuessInt < secretNumber) {
+                        Console.WriteLine ("Nope, too low!");
+                    }
+                    attempts++;
                 }
-            else if (userGuessInt < secretNumber)
-                {
-                    Console.WriteLine("higher!");
+            } else {
+                while (attempts < allowed) {
+                    Console.WriteLine ($"Guess the secret number. Your guess ({attempts + 1})");
+                    string userGuess = Console.ReadLine ();
+                    int userGuessInt = Int32.Parse (userGuess);
+                    if (userGuessInt == secretNumber) {
+                        Console.WriteLine ("Yup! You guessed it!");
+                        break;
+                    } else if (userGuessInt > secretNumber) {
+                        Console.WriteLine ("Nope, too high!");
+                    } else if (userGuessInt < secretNumber) {
+                        Console.WriteLine ("Nope, too low!");
+                    }
+                    attempts++;
                 }
             }
-
         }
     }
 }
