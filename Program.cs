@@ -11,17 +11,17 @@ namespace GuessingGame {
             Console.WriteLine ("Select Difficulty: Easy, Medium, Hard, or Cheater");
             string difficulty = Console.ReadLine ();
 
-            int attempts = 0;
-            int allowed = 8;
+            int guesses = 0;
+            int guessesAllowed = 8;
 
             if (difficulty == "Easy") {
-                allowed = 8;
+                guessesAllowed = 8;
             } else if (difficulty == "Medium") {
-                allowed = 6;
+                guessesAllowed = 6;
             } else if (difficulty == "Hard") {
-                allowed = 4;
+                guessesAllowed = 4;
             } else if (difficulty == "Cheater") {
-                allowed = 8;
+                guessesAllowed = 8;
             } else {
                 Console.WriteLine ("Select Difficulty: Easy, Medium, Hard, or Cheater");
                 difficulty = Console.ReadLine ();
@@ -29,7 +29,7 @@ namespace GuessingGame {
 
             if (difficulty == "Cheater") {
                 while (true) {
-                    Console.WriteLine ($"Guess the secret number. Your guess ({attempts + 1})");
+                    Console.WriteLine ($"Guess the secret number. Your guess ({guesses + 1})");
                     string userGuess = Console.ReadLine ();
                     int userGuessInt = Int32.Parse (userGuess);
                     if (userGuessInt == secretNumber) {
@@ -40,11 +40,11 @@ namespace GuessingGame {
                     } else if (userGuessInt < secretNumber) {
                         Console.WriteLine ("Nope, too low!");
                     }
-                    attempts++;
+                    guesses++;
                 }
             } else {
-                while (attempts < allowed) {
-                    Console.WriteLine ($"Guess the secret number. Your guess ({attempts + 1})");
+                while (guesses < guessesAllowed) {
+                    Console.WriteLine ($"Guess the secret number. Your guess ({guesses + 1})");
                     string userGuess = Console.ReadLine ();
                     int userGuessInt = Int32.Parse (userGuess);
                     if (userGuessInt == secretNumber) {
@@ -55,7 +55,7 @@ namespace GuessingGame {
                     } else if (userGuessInt < secretNumber) {
                         Console.WriteLine ("Nope, too low!");
                     }
-                    attempts++;
+                    guesses++;
                 }
             }
         }
